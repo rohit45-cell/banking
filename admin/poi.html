@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ER Diagram</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <pre class="mermaid">
+erDiagram
+    ib_staff {
+        int staff_id PK
+        varchar name
+        varchar staff_number
+        varchar phone
+        varchar email
+        varchar password
+        varchar sex
+        varchar profile_pic
+    }
+    
+    ib_systemsettings {
+        int id PK
+        longtext sys_name
+        longtext sys_tagline
+        varchar sys_logo
+    }
+    
+    ib_transactions {
+        int tr_id PK
+        varchar tr_code
+        varchar account_id FK
+        varchar acc_name
+        varchar account_number
+        varchar acc_type
+        varchar acc_amount
+        varchar tr_type
+        varchar tr_status
+        varchar client_id FK
+        varchar client_name
+        varchar client_national_id
+        varchar transaction_amt
+        varchar client_phone
+        varchar receiving_acc_no
+        timestamp created_at
+        varchar receiving_acc_name
+        varchar receiving_acc_holder
+    }
+    
+    ib_clients {
+        int client_id PK
+        varchar client_name
+        varchar client_national_id
+        varchar client_phone
+    }
+    
+    ib_accounts {
+        int account_id PK
+        varchar account_number
+        varchar acc_name
+        varchar acc_type
+        varchar acc_balance
+        int client_id FK
+    }
+    
+    ib_staff ||--o{ ib_transactions : "manages"
+    ib_clients ||--o{ ib_transactions : "initiates"
+    ib_accounts ||--o{ ib_transactions : "linked to"
+    </pre>
+</body>
+</html>
